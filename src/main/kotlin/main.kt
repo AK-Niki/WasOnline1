@@ -20,16 +20,16 @@ fun agoToText(secondsAgo: Int) {
 
 fun formatMinutesAgo(minutes: Int): String {
     return when {
-        minutes % 10 == 1 && minutes != 11 -> "$minutes минуту"
-        (minutes % 10 == 2 || minutes % 10 == 3 || minutes % 10 == 4) && !(minutes >= 12 && minutes <= 14) -> "$minutes минуты"
+        minutes % 10 == 1 && minutes % 100 != 11 -> "$minutes минуту"
+        minutes % 10 in 2..4 && minutes % 100 !in 12..14 -> "$minutes минуты"
         else -> "$minutes минут"
     } + " назад"
 }
 
 fun formatHoursAgo(hours: Int): String {
     return when {
-        hours == 1 || hours == 21 -> "$hours час назад"
-        (hours >= 2 && hours <= 4) || (hours >= 22 && hours <= 24) -> "$hours часа назад"
-        else -> "$hours часов назад"
-    }
+        hours % 10 == 1 && hours % 100 != 11 -> "$hours час"
+        hours % 10 in 2..4 && hours % 100 !in 12..14 -> "$hours часа"
+        else -> "$hours часов"
+    } + " назад"
 }
